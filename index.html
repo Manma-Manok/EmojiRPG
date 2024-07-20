@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji RPG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="theme-toggle" onclick="toggleTheme()">🌑</button>
+    <h1>Emoji RPG</h1>
+    <div id="game">
+        <div id="player" class="column">
+            <h2>Player</h2>
+            <p>Health: <span id="player-health">100</span></p>
+            <p>Attack Power: <span id="player-attack">10</span></p>
+            <p>Coins: <span id="player-coins">0</span></p>
+            <p>Inventory: <span id="player-inventory">💉💉💉💉💉💉💉💉💉💉💉💉💉💉💉</span></p>
+            <div class="buttons">
+                <button onclick="attack()">⚔️ Attack</button>
+                <button onclick="heal()">💉 Heal</button>
+                <button onclick="useSharpeningStone()">🗿 Use Sharpening Stone</button>
+                <button onclick="useHealthPotion()">🧪 Use Health Potion</button>
+                <button onclick="useBomb()">💣 Use Bomb</button>
+                <button onclick="addEnemy()">➕ Add Enemy</button>
+            </div>
+        </div>
+        <div id="enemies" class="column">
+            <h2>Enemies</h2>
+            <!-- Enemies will be dynamically added here -->
+        </div>
+    </div>
+    <div id="shop">
+        <h2>Shop</h2>
+        <button onclick="buyItem('💉')">Buy Medicament (50 coins)</button>
+        <button onclick="buyItem('🗿')">Buy Sharpening Stone (100 coins)</button>
+        <button onclick="buyItem('🧪')">Buy Health Potion (250 coins)</button>
+        <button onclick="buyItem('💣')">Buy Bomb (150 coins)</button>
+        <button onclick="buyItem('💕')">Buy Strong Hearts (350 coins)</button>
+    </div>
+    <div id="cheat-menu" style="display:none;">
+        <h2>Cheat Menu</h2>
+        <input type="text" id="cheat-command" placeholder="Enter command">
+        <button onclick="executeCheat()">Execute</button>
+    </div>
+    <div id="help-menu" style="display:none;">
+        <h2>Help Menu</h2>
+        <p><strong>Enemies:</strong> 🧛‍♂️, 🧟‍♂️, 👨‍⚕️, 👩‍⚕️, 👹, 🐉, 👾</p>
+        <p><strong>Items:</strong> 💉, 🗿, 🧪, 💣, 💕</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
