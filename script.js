@@ -6,11 +6,11 @@ function createEmoji() {
   const emojiDiv = document.createElement('div');
   emojiDiv.classList.add('emoji');
   emojiDiv.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-  emojiDiv.style.left = Math.random() * 90 + 'vw';
-  emojiDiv.style.top = Math.random() * 50 + 'vh';
+  emojiDiv.style.left = Math.random() * 90 + 'vw'; // Случайное положение по горизонтали
+  emojiDiv.style.top = Math.random() * 50 + 'vh';  // Случайное положение по вертикали
   
   emojiDiv.addEventListener('click', () => {
-    document.querySelector('#emoji-container').removeChild(emojiDiv);
+    emojiDiv.remove(); // Удаление эмодзи при клике
     score += 1;
     document.getElementById('score').textContent = `Score: ${score}`;
   });
@@ -21,7 +21,7 @@ function createEmoji() {
 // Создание эмодзи каждые 2 секунды
 setInterval(createEmoji, 2000);
 
-// Кнопка, которая открывает сайт с информацией о листинге
+// Кнопка для открытия страницы с информацией о листинге
 document.getElementById('listing-button').addEventListener('click', () => {
-  window.open('https://your-listing-site.com', '_blank');
+  window.open('https://your-listing-site.com', '_blank'); // Замени ссылку на реальный URL
 });
