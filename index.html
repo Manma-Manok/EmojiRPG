@@ -1,46 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji RPG</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Emoji RPG</h1>
-        <div id="player-stats">
-            <p>HP: <span id="player-hp">100</span></p>
-            <p>Coins: <span id="coins">0</span></p>
-        </div>
-        <div id="enemy"></div>
-        <button id="attack-button">Attack!</button>
-        <div id="shop">
-            <h2>Shop</h2>
-            <button id="heal-button">Buy First Aid Kit (10 coins)</button>
-            <button id="damage-button">Increase Damage (20 coins)</button>
-            <button id="hp-button">Increase Max HP (30 coins)</button>
-        </div>
-        <div id="message"></div>
-        
-        <!-- Rating System -->
-        <div id="rating">
-            <h2>Rate this site:</h2>
-            <div id="stars">
-                <span class="star" data-value="1">⭐</span>
-                <span class="star" data-value="2">⭐</span>
-                <span class="star" data-value="3">⭐</span>
-                <span class="star" data-value="4">⭐</span>
-                <span class="star" data-value="5">⭐</span>
-            </div>
-            <p>Average Rating: <span id="average-rating">0</span> (based on <span id="rating-count">0</span> ratings)</p>
-        </div>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+}
 
-        <a href='fisting.html' target='_blank'>
-            <img src='https://i.postimg.cc/yxRFrk23/photo-2024-09-30-19-22-02.jpg' alt='postimage' class='post-image'/>
-        </a>
-        <button id="exit-button">Exit</button>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.stars {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 24px;
+    margin: 5px;
+}
