@@ -3,6 +3,9 @@ let playerCoins = 0;
 let enemyHP = 50;
 const enemyEmojis = ["👾", "👹", "👺", "👿", "👻"];
 let currentEnemy = getRandomEnemy();
+let ratings = [];
+let totalRating = 0;
+let ratingCount = 0;
 
 function getRandomEnemy() {
     const randomIndex = Math.floor(Math.random() * enemyEmojis.length);
@@ -13,6 +16,8 @@ function updateDisplay() {
     document.getElementById("player-hp").textContent = playerHP;
     document.getElementById("coins").textContent = playerCoins;
     document.getElementById("enemy").textContent = currentEnemy;
+    document.getElementById("average-rating").textContent = (ratingCount > 0) ? (totalRating / ratingCount).toFixed(1) : 0;
+    document.getElementById("rating-count").textContent = ratingCount;
 }
 
 document.getElementById("attack-button").addEventListener("click", () => {
@@ -74,6 +79,28 @@ document.getElementById("hp-button").addEventListener("click", () => {
 
 document.getElementById("exit-button").addEventListener("click", () => {
     window.close();
+});
+
+// Rating System
+const stars = document.querySelectorAll('.star');
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const ratingValue = parseInt(star.getAttribute('data-value'));
+        
+        // Check if already rated
+        if (!ratings.includes(currentEnemy)) {
+            ratings.push(currentEnemy);
+            totalRating += ratingValue;
+            ratingCount++;
+            updateDisplay();
+            document.getElementById("message").textContent = `Thank you for rating! You rated ${ratingValue} star(s).`;
+            
+            // Disable further rating
+            stars.forEach(s => s.style.pointerEvents = 'none');
+        } else {
+            document.getElementById("message").textContent = `You have already rated this enemy.`;
+        }
+    });
 });
 
 // Initial update
