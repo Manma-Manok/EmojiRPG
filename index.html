@@ -26,7 +26,7 @@
             <div id="average-rating-section">
                 <h3>Средний рейтинг: <span id="average-rating">0</span></h3>
                 <h4>Количество отзывов: <span id="rating-count">0</span></h4>
-                <p id="message"></p>
+                <p id="message-rating"></p>
                 <div class="stars">
                     <span class="star" data-value="1">⭐</span>
                     <span class="star" data-value="2">⭐</span>
@@ -41,6 +41,33 @@
                 <img src="https://i.postimg.cc/yxRFrk23/photo-2024-09-30-19-22-02.jpg" alt="Exit">
             </a>
         </div>
+        <div class="fisting-button">
+            <button id="fisting-button">Фистинг 2026</button>
+        </div>
     </div>
+
+    <div id="fisting-page" class="hidden">
+        <h2>Фистинг 2026 года</h2>
+        <p>Здесь можно добавить информацию о фистинге в 2026 году.</p>
+        <button id="back-button">Назад</button>
+    </div>
+
+    <script>
+        // Переключение между страницами
+        const fistingButton = document.getElementById('fisting-button');
+        const fistingPage = document.getElementById('fisting-page');
+        const backButton = document.getElementById('back-button');
+        const gameSection = document.getElementById('game');
+
+        fistingButton.addEventListener('click', () => {
+            gameSection.classList.add('hidden');
+            fistingPage.classList.remove('hidden');
+        });
+
+        backButton.addEventListener('click', () => {
+            fistingPage.classList.add('hidden');
+            gameSection.classList.remove('hidden');
+        });
+    </script>
 </body>
 </html>
