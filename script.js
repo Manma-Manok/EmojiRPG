@@ -103,12 +103,12 @@ stars.forEach(star => {
             ratingCount++;
             hasRated = true; // Пометить как оцененный
             displayAverageRating(totalRating, ratingCount);
-            document.getElementById("message").textContent = `Спасибо за отзыв! Вы оценили ${ratingValue} звезды.`;
+            document.getElementById("message-rating").textContent = `Спасибо за отзыв! Вы оценили ${ratingValue} звезды.`;
 
             // Отключение возможности повторного голосования
             stars.forEach(s => s.style.pointerEvents = 'none');
         } else {
-            document.getElementById("message").textContent = `Вы уже оставили отзыв на этот сайт.`;
+            document.getElementById("message-rating").textContent = `Вы уже оставили отзыв на этот сайт.`;
         }
     });
 });
