@@ -47,3 +47,22 @@ button:hover {
     width: 200px;
     margin-top: 20px;
 }
+/* Existing styles... */
+
+#rating {
+    margin-top: 20px;
+}
+
+#stars {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.star {
+    transition: color 0.3s;
+}
+
+.star:hover {
+    color: gold;
+}
+
