@@ -20,6 +20,7 @@ function updateDisplay() {
     document.getElementById("rating-count").textContent = ratingCount;
 }
 
+// Attack functionality
 document.getElementById("attack-button").addEventListener("click", () => {
     const damage = Math.floor(Math.random() * 20) + 1;
     enemyHP -= damage;
@@ -45,6 +46,7 @@ document.getElementById("attack-button").addEventListener("click", () => {
     updateDisplay();
 });
 
+// Shop functionality
 document.getElementById("heal-button").addEventListener("click", () => {
     if (playerCoins >= 10) {
         playerCoins -= 10;
@@ -77,6 +79,7 @@ document.getElementById("hp-button").addEventListener("click", () => {
     updateDisplay();
 });
 
+// Exit functionality
 document.getElementById("exit-button").addEventListener("click", () => {
     window.close();
 });
@@ -88,8 +91,8 @@ stars.forEach(star => {
         const ratingValue = parseInt(star.getAttribute('data-value'));
         
         // Check if already rated
-        if (!ratings.includes(currentEnemy)) {
-            ratings.push(currentEnemy);
+        if (!ratings.includes("siteRating")) {
+            ratings.push("siteRating");
             totalRating += ratingValue;
             ratingCount++;
             updateDisplay();
@@ -98,7 +101,7 @@ stars.forEach(star => {
             // Disable further rating
             stars.forEach(s => s.style.pointerEvents = 'none');
         } else {
-            document.getElementById("message").textContent = `You have already rated this enemy.`;
+            document.getElementById("message").textContent = `You have already rated this site.`;
         }
     });
 });
