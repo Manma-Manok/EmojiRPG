@@ -41,3 +41,7 @@ button:hover {
     font-size: 24px;
     margin: 5px;
 }
+
+.hidden {
+    display: none;
+}
