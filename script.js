@@ -14,6 +14,9 @@ if (localStorage.getItem("ratingCount")) {
     ratingCount = parseInt(localStorage.getItem("ratingCount"));
 }
 
+// Check if user has already rated
+let hasRated = localStorage.getItem("hasRated") === "true";
+
 // Display average rating
 function displayAverageRating() {
     const averageRating = (ratingCount > 0) ? (totalRating / ratingCount).toFixed(1) : 0;
@@ -101,7 +104,6 @@ document.getElementById("exit-button").addEventListener("click", () => {
 
 // Rating System
 const stars = document.querySelectorAll('.star');
-let hasRated = localStorage.getItem("hasRated") === "true";
 
 if (hasRated) {
     stars.forEach(star => star.style.pointerEvents = 'none');
