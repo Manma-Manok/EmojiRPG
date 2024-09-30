@@ -4,7 +4,6 @@ body {
   background-color: #f0f0f0;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 #game-container {
@@ -45,4 +44,12 @@ body {
   padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
+p {
+  font-size: 1.2em;
 }
