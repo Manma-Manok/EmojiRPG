@@ -1,73 +1,19 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji RPG Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="module" src="script.js" defer></script>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Collector</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Emoji RPG</h1>
-        <div id="game">
-            <div>
-                <h3>Ваше здоровье: <span id="player-hp">100</span></h3>
-                <h3>Ваши монеты: <span id="coins">0</span></h3>
-                <h3>Противник: <span id="enemy"></span></h3>
-                <button id="attack-button">Атаковать</button>
-                <button id="shop-button">Магазин</button>
-            </div>
-            <div id="message"></div>
-            <div id="average-rating-section">
-                <h3>Средний рейтинг: <span id="average-rating">0</span></h3>
-                <h4>Количество отзывов: <span id="rating-count">0</span></h4>
-                <p id="message-rating"></p>
-                <div class="stars">
-                    <span class="star" data-value="1">⭐</span>
-                    <span class="star" data-value="2">⭐</span>
-                    <span class="star" data-value="3">⭐</span>
-                    <span class="star" data-value="4">⭐</span>
-                    <span class="star" data-value="5">⭐</span>
-                </div>
-            </div>
-        </div>
-        <div class="exit-button">
-            <a href="https://postimages.org/" target="_blank">
-                <img src="https://i.postimg.cc/yxRFrk23/photo-2024-09-30-19-22-02.jpg" alt="Exit">
-            </a>
-        </div>
-        <div class="fisting-button">
-            <button id="fisting-button">Фистинг 2026</button>
-        </div>
-    </div>
+  <div id="game-container">
+    <div id="emoji-container"></div>
+    <div id="basket">🧺</div>
+    <div id="score">Score: 0</div>
+  </div>
+  <button id="listing-button">Go to Listing Info</button>
 
-    <div id="fisting-page" class="hidden">
-        <h2>Фистинг 2026 года</h2>
-        <p>Здесь можно добавить информацию о фистинге в 2026 году.</p>
-        <button id="back-button">Назад</button>
-    </div>
-
-    <script>
-        // Переключение между страницами
-        const fistingButton = document.getElementById('fisting-button');
-        const fistingPage = document.getElementById('fisting-page');
-        const backButton = document.getElementById('back-button');
-        const gameSection = document.getElementById('game');
-
-        fistingButton.addEventListener('click', () => {
-            gameSection.classList.add('hidden');
-            fistingPage.classList.remove('hidden');
-        });
-
-        backButton.addEventListener('click', () => {
-            fistingPage.classList.add('hidden');
-            gameSection.classList.remove('hidden');
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
