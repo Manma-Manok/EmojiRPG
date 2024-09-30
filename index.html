@@ -1,43 +1,46 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 20px;
-}
-
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-.stars {
-    display: inline-block;
-    cursor: pointer;
-}
-
-.star {
-    font-size: 24px;
-    margin: 5px;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji RPG Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js" defer></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Emoji RPG</h1>
+        <div id="game">
+            <div>
+                <h3>Ваше здоровье: <span id="player-hp">100</span></h3>
+                <h3>Ваши монеты: <span id="coins">0</span></h3>
+                <h3>Противник: <span id="enemy"></span></h3>
+                <button id="attack-button">Атаковать</button>
+                <button id="shop-button">Магазин</button>
+            </div>
+            <div id="message"></div>
+            <div id="average-rating-section">
+                <h3>Средний рейтинг: <span id="average-rating">0</span></h3>
+                <h4>Количество отзывов: <span id="rating-count">0</span></h4>
+                <p id="message"></p>
+                <div class="stars">
+                    <span class="star" data-value="1">⭐</span>
+                    <span class="star" data-value="2">⭐</span>
+                    <span class="star" data-value="3">⭐</span>
+                    <span class="star" data-value="4">⭐</span>
+                    <span class="star" data-value="5">⭐</span>
+                </div>
+            </div>
+        </div>
+        <div class="exit-button">
+            <a href="https://postimages.org/" target="_blank">
+                <img src="https://i.postimg.cc/yxRFrk23/photo-2024-09-30-19-22-02.jpg" alt="Exit">
+            </a>
+        </div>
+    </div>
+</body>
+</html>
