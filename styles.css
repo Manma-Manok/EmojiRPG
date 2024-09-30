@@ -2,6 +2,9 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 #game-container {
@@ -12,7 +15,7 @@ body {
 }
 
 #emoji-container {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
