@@ -23,5 +23,5 @@ setInterval(createEmoji, 2000);
 
 // Кнопка для открытия страницы с информацией о листинге
 document.getElementById('listing-button').addEventListener('click', () => {
-  window.open('https://your-listing-site.com', '_blank'); // Замени ссылку на реальный URL
+  window.location.href = 'listing.html'; // Переход на страницу с информацией о листинге
 });
