@@ -1,3 +1,23 @@
+// Импортируйте функции, которые вам нужны из SDK
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+
+// Конфигурация вашего веб-приложения Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyBl4kCDH21kZq1DMhfnwMqsXn9fHzO5vk4",
+  authDomain: "emoji-coin-rpg.firebaseapp.com",
+  projectId: "emoji-coin-rpg",
+  storageBucket: "emoji-coin-rpg.appspot.com",
+  messagingSenderId: "992797122367",
+  appId: "1:992797122367:web:87b9ae48cd631b3b8bfd8a",
+  measurementId: "G-ZXVS5SKTB0"
+};
+
+// Инициализация Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Переменные игры
 let playerHP = 100;
 let playerCoins = 0;
 let enemyHP = 50;
@@ -5,132 +25,94 @@ const enemyEmojis = ["👾", "👹", "👺", "👿", "👻"];
 let currentEnemy = getRandomEnemy();
 let totalRating = 0;
 let ratingCount = 0;
+let hasRated = false;
 
-// Load saved rating from localStorage
-if (localStorage.getItem("totalRating")) {
-    totalRating = parseInt(localStorage.getItem("totalRating"));
-}
-if (localStorage.getItem("ratingCount")) {
-    ratingCount = parseInt(localStorage.getItem("ratingCount"));
-}
-
-// Check if user has already rated
-let hasRated = localStorage.getItem("hasRated") === "true";
-
-// Display average rating
-function displayAverageRating() {
-    const averageRating = (ratingCount > 0) ? (totalRating / ratingCount).toFixed(1) : 0;
-    document.getElementById("average-rating").textContent = averageRating;
-    document.getElementById("rating-count").textContent = ratingCount;
-}
-
-// Function to get a random enemy emoji
+// Функция для получения случайного врага
 function getRandomEnemy() {
     const randomIndex = Math.floor(Math.random() * enemyEmojis.length);
     return enemyEmojis[randomIndex];
 }
 
-// Update displayed stats
+// Обновление отображаемых статистик
 function updateDisplay() {
     document.getElementById("player-hp").textContent = playerHP;
     document.getElementById("coins").textContent = playerCoins;
     document.getElementById("enemy").textContent = currentEnemy;
-    displayAverageRating();
 }
 
-// Attack functionality
+// Функция для атаки
 document.getElementById("attack-button").addEventListener("click", () => {
-    const damage = Math.floor(Math.random() * 20) + 1;
+    const damage = 10; // Урон игрока
     enemyHP -= damage;
-    document.getElementById("message").textContent = `You dealt ${damage} damage!`;
-    
     if (enemyHP <= 0) {
-        playerCoins += 10;
-        enemyHP = 50; // Reset enemy HP
-        currentEnemy = getRandomEnemy(); // Get a new enemy
-        document.getElementById("message").textContent += ` You defeated the enemy! You earned 10 coins.`;
+        playerCoins += 10; // Получаем монеты
+        enemyHP = 50; // Восстанавливаем здоровье врага
+        currentEnemy = getRandomEnemy(); // Получаем нового врага
+        document.getElementById("message").textContent = `Вы победили ${currentEnemy}! Вы получили 10 монет!`;
+    } else {
+        playerHP -= 5; // Урон врага
+        document.getElementById("message").textContent = `${currentEnemy} атакует! Ваше здоровье: ${playerHP}`;
     }
+    updateDisplay();
+});
+
+// Функция для добавления нового отзыва
+async function addRating(ratingValue) {
+    try {
+        await addDoc(collection(db, "ratings"), { rating: ratingValue });
+        console.log("Отзыв добавлен: ", ratingValue);
+    } catch (error) {
+        console.error("Ошибка добавления отзыва: ", error);
+    }
+}
+
+// Функция для загрузки отзывов
+async function loadRatings() {
+    const ratingsRef = collection(db, "ratings");
+    const snapshot = await getDocs(ratingsRef);
     
-    // Enemy attacks back
-    const enemyDamage = Math.floor(Math.random() * 15) + 1;
-    playerHP -= enemyDamage;
-    if (playerHP <= 0) {
-        playerHP = 0;
-        document.getElementById("message").textContent += ` You have been defeated!`;
-    } else {
-        document.getElementById("message").textContent += ` The enemy dealt ${enemyDamage} damage.`;
-    }
+    totalRating = 0;
+    ratingCount = 0;
 
-    updateDisplay();
-});
+    snapshot.forEach(doc => {
+        totalRating += doc.data().rating;
+        ratingCount++;
+    });
 
-// Shop functionality
-document.getElementById("heal-button").addEventListener("click", () => {
-    if (playerCoins >= 10) {
-        playerCoins -= 10;
-        playerHP = Math.min(playerHP + 20, 100);
-        document.getElementById("message").textContent = `You bought a first aid kit!`;
-    } else {
-        document.getElementById("message").textContent = `Not enough coins!`;
-    }
-    updateDisplay();
-});
+    displayAverageRating(totalRating, ratingCount);
+}
 
-document.getElementById("damage-button").addEventListener("click", () => {
-    if (playerCoins >= 20) {
-        playerCoins -= 20;
-        document.getElementById("message").textContent = `You increased your damage!`;
-    } else {
-        document.getElementById("message").textContent = `Not enough coins!`;
-    }
-    updateDisplay();
-});
+// Отображение среднего рейтинга
+function displayAverageRating(total, count) {
+    const averageRating = (count > 0) ? (total / count).toFixed(1) : 0;
+    document.getElementById("average-rating").textContent = averageRating;
+    document.getElementById("rating-count").textContent = count;
+}
 
-document.getElementById("hp-button").addEventListener("click", () => {
-    if (playerCoins >= 30) {
-        playerCoins -= 30;
-        playerHP += 20;
-        document.getElementById("message").textContent = `You increased your max HP!`;
-    } else {
-        document.getElementById("message").textContent = `Not enough coins!`;
-    }
-    updateDisplay();
-});
-
-// Exit functionality
-document.getElementById("exit-button").addEventListener("click", () => {
-    window.close();
-});
-
-// Rating System
+// Система рейтинга
 const stars = document.querySelectorAll('.star');
 
-if (hasRated) {
-    stars.forEach(star => star.style.pointerEvents = 'none');
-}
-
 stars.forEach(star => {
-    star.addEventListener('click', () => {
+    star.addEventListener('click', async () => {
         const ratingValue = parseInt(star.getAttribute('data-value'));
 
-        // Save the rating
+        // Проверка, оставил ли пользователь отзыв
         if (!hasRated) {
+            await addRating(ratingValue);
             totalRating += ratingValue;
             ratingCount++;
-            localStorage.setItem("totalRating", totalRating);
-            localStorage.setItem("ratingCount", ratingCount);
-            localStorage.setItem("hasRated", true); // Mark as rated
+            hasRated = true; // Пометить как оцененный
+            displayAverageRating(totalRating, ratingCount);
+            document.getElementById("message").textContent = `Спасибо за отзыв! Вы оценили ${ratingValue} звезды.`;
 
-            displayAverageRating();
-            document.getElementById("message").textContent = `Thank you for rating! You rated ${ratingValue} star(s).`;
-
-            // Disable further rating
+            // Отключение возможности повторного голосования
             stars.forEach(s => s.style.pointerEvents = 'none');
         } else {
-            document.getElementById("message").textContent = `You have already rated this site.`;
+            document.getElementById("message").textContent = `Вы уже оставили отзыв на этот сайт.`;
         }
     });
 });
 
-// Initial update
+// Загрузка отзывов при первоначальной загрузке страницы
+loadRatings();
 updateDisplay();
