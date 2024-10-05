@@ -3,16 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emoji Collector</title>
+  <title>Emoji RPG Collector</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="game-container">
+  <!-- Выбор класса -->
+  <div id="class-selection">
+    <h1>Select Your Class</h1>
+    <button class="class-button" data-class="warrior">Warrior</button>
+    <button class="class-button" data-class="mage">Mage</button>
+    <button class="class-button" data-class="rogue">Rogue</button>
+  </div>
+
+  <!-- Основной интерфейс игры, скрыт до выбора класса -->
+  <div id="game-container" style="display: none;">
     <div id="emoji-container"></div>
     <div id="basket">🧺</div>
     <div id="score">Score: 0</div>
+    <div id="upgrade-section">
+      <h2>Upgrades</h2>
+      <button class="upgrade-button" data-upgrade="increase-click-power">Increase Click Power</button>
+      <button class="upgrade-button" data-upgrade="faster-emojis">Faster Emoji Spawn</button>
+      <button class="upgrade-button" data-upgrade="bonus-chance">Increase Bonus Chance</button>
+    </div>
   </div>
-  <button id="listing-button">Go to Listing Info</button>
+
+  <button id="listing-button" style="display: none;">Go to Listing Info</button>
+  <button id="reset-button" style="display: none;">Reset Score</button>
 
   <script src="script.js"></script>
 </body>
