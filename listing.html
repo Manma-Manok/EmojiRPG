@@ -3,12 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listing Info</title>
+  <title>Emoji Collector Remake</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Listing Information</h1>
-  <p>The official listing will happen in 2026. Stay tuned for more details!</p>
-  <button onclick="window.location.href='index.html'">Back to Game</button>
+  <div id="game-container">
+    <div id="emoji-container"></div>
+    <div id="basket">🧺</div>
+    <div id="score">Score: 0</div>
+  </div>
+  
+  <button id="listing-button">Go to Listing Info</button>
+  <button id="reset-button">Reset Score</button>
+
+  <!-- Звук при клике -->
+  <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+  <!-- Музыка -->
+  <audio id="bg-music" src="background-music.mp3" autoplay loop preload="auto"></audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
