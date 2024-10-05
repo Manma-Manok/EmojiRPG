@@ -24,7 +24,18 @@ body {
   position: absolute;
   font-size: 2em;
   cursor: pointer;
+  animation: fall 5s linear infinite;
 }
+
+@keyframes fall {
+  from {
+    top: -10%;
+  }
+  to {
+    top: 100%;
+  }
+}
+
 
 #basket {
   font-size: 3em;
