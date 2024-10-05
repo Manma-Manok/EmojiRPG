@@ -25,3 +25,17 @@ setInterval(createEmoji, 2000);
 document.getElementById('listing-button').addEventListener('click', () => {
   window.location.href = 'listing.html'; // Переход на страницу с информацией о листинге
 });
+let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
+document.getElementById('score').textContent = `Score: ${score}`;
+
+function updateScore() {
+  score += 1;
+  document.getElementById('score').textContent = `Score: ${score}`;
+  localStorage.setItem('score', score); // Сохранение в LocalStorage
+}
+
+emojiDiv.addEventListener('click', () => {
+  emojiDiv.remove();
+  updateScore();
+});
+
