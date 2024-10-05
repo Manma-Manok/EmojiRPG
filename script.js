@@ -16,11 +16,13 @@ document.querySelectorAll('.class-button').forEach(button => {
 });
 
 function startGame(selectedClass) {
+  // Скрываем выбор класса и показываем игровой интерфейс
   document.getElementById('class-selection').style.display = 'none';
   document.getElementById('game-container').style.display = 'block';
   document.getElementById('listing-button').style.display = 'block';
   document.getElementById('reset-button').style.display = 'block';
 
+  // Настройка бонусов для каждого класса
   if (selectedClass === 'warrior') {
     clickPower = 2; // У воинов удвоенная сила кликов
   } else if (selectedClass === 'mage') {
@@ -30,7 +32,10 @@ function startGame(selectedClass) {
     bonusChance = 0.2; // Разбойники получают повышенный шанс на бонусные эмодзи
   }
 
-  // Запуск игры
+  // Обновляем счет, если игрок — маг (начинает с бонуса очков)
+  document.getElementById('score').textContent = `Score: ${score}`;
+
+  // Запуск игры — появление эмодзи
   setInterval(createEmoji, emojiSpawnRate);
 }
 
@@ -39,20 +44,21 @@ function createEmoji() {
   const emojiDiv = document.createElement('div');
   emojiDiv.classList.add('emoji');
   let randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-  
+
   emojiDiv.textContent = randomEmoji;
-  emojiDiv.style.left = Math.random() * 90 + 'vw'; 
-  
+  emojiDiv.style.left = Math.random() * 90 + 'vw'; // Случайное положение по горизонтали
+  emojiDiv.style.top = Math.random() * 50 + 'vh';  // Случайное положение по вертикали
+
   // Обработка клика по эмодзи
   emojiDiv.addEventListener('click', () => {
     emojiDiv.remove();
     let points = clickPower;
-    
-    // Шанс на бонусные очки
+
+    // Шанс на бонусные очки (для разбойника или магического эмодзи)
     if (Math.random() < bonusChance && randomEmoji === '✨') {
       points *= 2;
     }
-    
+
     score += points;
     document.getElementById('score').textContent = `Score: ${score}`;
   });
@@ -69,7 +75,7 @@ document.querySelectorAll('.upgrade-button').forEach(button => {
       if (button.dataset.upgrade === 'increase-click-power') {
         clickPower++;
       } else if (button.dataset.upgrade === 'faster-emojis') {
-        emojiSpawnRate = Math.max(emojiSpawnRate - 200, 500); // Ускорение эмодзи
+        emojiSpawnRate = Math.max(emojiSpawnRate - 200, 500); // Ускорение появления эмодзи
       } else if (button.dataset.upgrade === 'bonus-chance') {
         bonusChance = Math.min(bonusChance + 0.05, 0.5); // Увеличение шанса на бонус
       }
