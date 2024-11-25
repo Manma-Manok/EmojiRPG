@@ -3,14 +3,42 @@ let score = 0;
 let classType = null;
 let clickPower = 1; // Базовая сила кликов
 let bonusChance = 0.1; // Базовый шанс на бонус
-
-// Переменные для апгрейдов
 let emojiSpawnRate = 2000; // Интервал появления эмодзи (в миллисекундах)
+
+// Загружаем данные из localStorage
+function loadProgress() {
+  const savedScore = localStorage.getItem('score');
+  const savedClass = localStorage.getItem('classType');
+
+  if (savedScore) {
+    score = parseInt(savedScore, 10); // Восстанавливаем очки
+  }
+
+  if (savedClass) {
+    classType = savedClass; // Восстанавливаем класс
+    startGame(classType); // Запускаем игру с восстановленным классом
+  }
+}
+
+// Сохраняем данные в localStorage
+function saveProgress() {
+  localStorage.setItem('score', score);
+  if (classType) {
+    localStorage.setItem('classType', classType);
+  }
+}
+
+// Обновляем отображение счета и сохраняем прогресс
+function updateScoreDisplay() {
+  document.getElementById('score').textContent = `Score: ${score}`;
+  saveProgress(); // Сохраняем прогресс
+}
 
 // Начало игры после выбора класса
 document.querySelectorAll('.class-button').forEach(button => {
   button.addEventListener('click', () => {
     classType = button.dataset.class;
+    saveProgress(); // Сохраняем выбор класса
     startGame(classType);
   });
 });
@@ -32,8 +60,7 @@ function startGame(selectedClass) {
     bonusChance = 0.2; // Разбойники получают повышенный шанс на бонусные эмодзи
   }
 
-  // Обновляем счет, если игрок — маг (начинает с бонуса очков)
-  document.getElementById('score').textContent = `Score: ${score}`;
+  updateScoreDisplay(); // Обновляем отображение счета
 
   // Запуск игры — появление эмодзи
   setInterval(createEmoji, emojiSpawnRate);
@@ -60,7 +87,7 @@ function createEmoji() {
     }
 
     score += points;
-    document.getElementById('score').textContent = `Score: ${score}`;
+    updateScoreDisplay(); // Обновляем счет и сохраняем прогресс
   });
 
   document.querySelector('#emoji-container').appendChild(emojiDiv);
@@ -79,8 +106,8 @@ document.querySelectorAll('.upgrade-button').forEach(button => {
       } else if (button.dataset.upgrade === 'bonus-chance') {
         bonusChance = Math.min(bonusChance + 0.05, 0.5); // Увеличение шанса на бонус
       }
-      
-      document.getElementById('score').textContent = `Score: ${score}`;
+
+      updateScoreDisplay(); // Обновляем счет и сохраняем прогресс
     }
   });
 });
@@ -88,10 +115,15 @@ document.querySelectorAll('.upgrade-button').forEach(button => {
 // Кнопка для сброса счета
 document.getElementById('reset-button').addEventListener('click', () => {
   score = 0;
-  document.getElementById('score').textContent = `Score: 0`;
+  updateScoreDisplay(); // Обновляем отображение и сохраняем
 });
 
 // Кнопка для перехода на страницу листинга
 document.getElementById('listing-button').addEventListener('click', () => {
   window.location.href = 'listing.html';
+});
+
+// Загрузка данных при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  loadProgress(); // Загружаем сохраненные данные
 });
