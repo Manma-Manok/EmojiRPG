@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emoji Collector Remake</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о листинге</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <div id="game-container">
-    <div id="emoji-container"></div>
-    <div id="basket">🧺</div>
-    <div id="score">Score: 0</div>
-  </div>
-  
-  <button id="listing-button">Go to Listing Info</button>
-  <button id="reset-button">Reset Score</button>
-
-  <!-- Звук при клике -->
-  <audio id="click-sound" src="click.mp3" preload="auto"></audio>
-  <!-- Музыка -->
-  <audio id="bg-music" src="background-music.mp3" autoplay loop preload="auto"></audio>
-
-  <script src="script.js"></script>
+    <h1>Информация о листинге</h1>
+    <p>Фистинг будет в 2026 году.</p>
+    <a href="index.html" class="back-button">Назад</a>
 </body>
 </html>
