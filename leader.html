@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f7f7;
+    }
+    h1 {
+      margin: 20px 0;
+    }
+    table {
+      width: 50%;
+      margin: 0 auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #eee;
+    }
+    input {
+      margin: 10px;
+      padding: 8px;
+    }
+    button {
+      padding: 10px;
+      margin: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #slider {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Leader Board</h1>
+  <table>
+    <tr>
+      <th>NAME</th>
+      <th>TOKEN</th>
+    </tr>
+    <tbody id="leaderboard">
+      <!-- Сюда будут добавляться строки таблицы -->
+    </tbody>
+  </table>
+
+  <div>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="addToLeaderboard()">Enter Name</button>
+  </div>
+
+  <div id="slider">
+    <label for="tokenSlider">Tokens:</label>
+    <input type="range" id="tokenSlider" min="1" max="100" value="1" oninput="updateTokenDisplay()">
+    <span id="tokenValue">1</span>
+  </div>
+
+  <script>
+    const emojiNames = ['😀', '😎', '😂', '🥳', '😇', '🤖', '🐶'];
+    let leaderboardData = [];
+
+    function updateTokenDisplay() {
+      document.getElementById('tokenValue').innerText = document.getElementById('tokenSlider').value;
+    }
+
+    function addToLeaderboard() {
+      const nameInput = document.getElementById('nameInput').value.trim();
+      const tokenValue = document.getElementById('tokenSlider').value;
+      const leaderboard = document.getElementById('leaderboard');
+
+      // Если имя не введено — используем случайное эмодзи
+      const playerName = nameInput || emojiNames[Math.floor(Math.random() * emojiNames.length)];
+
+      // Добавляем данные в массив
+      leaderboardData.push({ name: playerName, tokens: tokenValue });
+
+      // Сортировка по токенам
+      leaderboardData.sort((a, b) => b.tokens - a.tokens);
+
+      // Очистка таблицы
+      leaderboard.innerHTML = '';
+
+      // Перерисовываем таблицу
+      leaderboardData.forEach(entry => {
+        const row = `<tr>
+                      <td>${entry.name}</td>
+                      <td>${entry.tokens}</td>
+                    </tr>`;
+        leaderboard.innerHTML += row;
+      });
+
+      // Очистка поля ввода
+      document.getElementById('nameInput').value = '';
+    }
+  </script>
+</body>
+</html>
