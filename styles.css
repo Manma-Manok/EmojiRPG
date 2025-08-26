@@ -1,6 +1,7 @@
 /* Стиль для выбора класса */
 #class-selection {
   margin-top: 50px;
+  color: black;
 }
 
 .class-button {
@@ -8,16 +9,22 @@
   font-size: 1.2em;
   margin: 10px;
   cursor: pointer;
+  color: white;
+  background: black;
 }
 
 #upgrade-section {
   margin-top: 20px;
+  color: white;
+  background: black;
 }
 
 .upgrade-button {
   padding: 10px 15px;
   margin: 5px;
   cursor: pointer;
+  color: white;
+  background: black;
 }
 
 /* Стили из старого дизайна */
@@ -60,5 +67,7 @@ body {
 #score {
   margin-top: 10px;
   font-size: 1.5em;
+  color: black;
 }
+
 
