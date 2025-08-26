@@ -29,7 +29,6 @@
     0 0 40px #2e1475,
     0 0 80px #2e1475;          /* усиливаем свечение при наведении */
 }
-}
 
 #upgrade-section {
   margin-top: 20px;
@@ -43,6 +42,23 @@
   cursor: pointer;
   color: white;
   background: black;
+  border: none;
+  border-radius: 12px;
+    /* НЕОН */
+  box-shadow: 
+    0 0 5px #0b041f,
+    0 0 10px #0b041f,
+    0 0 20px #0b041f,
+    0 0 40px #0b041f;          /* эффект свечения */
+  transition: 0.3s;
+}
+
+.neon-btn:hover {
+  box-shadow: 
+    0 0 10px #2e1475,
+    0 0 20px #2e1475,
+    0 0 40px #2e1475,
+    0 0 80px #2e1475;          /* усиливаем свечение при наведении */
 }
 
 /* Стили из старого дизайна */
@@ -87,6 +103,7 @@ body {
   font-size: 1.5em;
   color: black;
 }
+
 
 
 
